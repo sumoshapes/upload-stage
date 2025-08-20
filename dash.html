@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Stage Repository</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Poppins, sans-serif;
+        color: white;
+      }
+      body,
+      html {
+        height: 100%;
+        background-color: #1a1a2e;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 20px;
+      }
+      .form-wrapper {
+        background-color: #16213e;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+      }
+      h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      .form-group {
+        margin-bottom: 1rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: bold;
+      }
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #0f3460;
+        background-color: #1a1a2e;
+        border-radius: 4px;
+        font-size: 1rem;
+      }
+      textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+      .file-input-wrapper {
+        position: relative;
+      }
+      .file-input-label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+        background-color: #1a1a2e;
+        border: 1px solid #0f3460;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .file-input-label:hover {
+        background-color: #f0f0f0;
+      }
+      .file-input-label svg {
+        width: 20px;
+        height: 20px;
+        margin-right: 8px;
+      }
+      input[type="file"] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+      }
+      button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #4a90e2;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+      button[type="submit"]:hover {
+        background-color: #3a7bc8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-wrapper">
+        <h2>Create Stage Repository</h2>
+        <form method="post" action="/create-repo" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="repo_name">Stage Name</label>
+            <input
+              type="text"
+              name="repo_name"
+              id="repo_name"
+              placeholder="Enter stage name"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="repo_description">Stage Description</label>
+            <textarea
+              name="repo_description"
+              id="repo_description"
+              placeholder="Enter stage description"
+              required
+            ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="repo_file">Stage File</label>
+            <div class="file-input-wrapper">
+              <label for="repo_file" class="file-input-label">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  height="24px"
+                  viewbox="0 -960 960 960"
+                  width="24px"
+                  fill="#e8eaed"
+                >
+                  <path
+                    d="M440-200h80v-167l64 64 56-57-160-160-160 160 57 56 63-63v167ZM240-80q-33 0-56.5-23.5T160-160v-640q0-33 23.5-56.5T240-880h320l240 240v480q0 33-23.5 56.5T720-80H240Zm280-520v-200H240v640h480v-440H520ZM240-800v200-200 640-640Z"
+                  />
+                </svg>
+                <span id="file-name">Choose a file</span>
+              </label>
+              <input type="file" name="repo_file" id="repo_file" accept="application/JSON" required />
+            </div>
+          </div>
+          <button type="submit">Create Stage Repo</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("repo_file")
+        .addEventListener("change", function (e) {
+          var fileName = e.target.files[0]
+            ? e.target.files[0].name
+            : "Choose a file";
+          document.getElementById("file-name").textContent = fileName;
+        });
+    </script>
+  </body>
+</html>
